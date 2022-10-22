@@ -1,0 +1,10 @@
+1 . date -u + "%D %j %W"
+2. date --date $ TZ='America/Los_Angeles' date ewentualnia dodac do tego date --date 
+3. find -size +1M
+4. find -name a*
+5 find /$HOME -ctime +90
+6 find / -size +30k -exec /bin/rm {} \;
+8 Locate README
+
+
+tworzenie skryptu vi nazwa.sh

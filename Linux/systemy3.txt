@@ -1,0 +1,112 @@
+
+
+--------------------------------ZADANIE 2--------------
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main(int argc, char *argv[])
+{
+
+if(argc < 3)
+{
+fprintf(stderr, "Niewystarczajaca ilosc argumentow\n");
+exit(1);
+}
+
+int m = 0;
+int n = 0;
+FILE *pl1;
+FILE *pl2;
+
+if((pl1 = fopen(argv[1], "r")) == NULL)
+printf("Ups nie mozna otworzyc wskazanego pliku \n");
+
+while((m = fgetc(f1)) != EOF)
+l++;
+
+fseek(pl11, SEEK_SET, 0);
+char m[n];
+fread(m, n, 1, pl1);
+
+fclose(pl1);
+
+if((pl2 = fopen(argv[2], "w")) == NULL)
+printf("Ups nie mozna otworzyc wskazanego pliku\n");
+
+fwrite(m, n, 1, pl2);
+
+fclose(pl2);
+
+return 0;
+}
+
+------------------------------------ZADANIE 3------------------------------------
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+
+#define buff_size 256 // jakby co to tu powiêkszyc wartoscbufora
+
+int main(int argc, char *argv[])
+{
+
+int wej, wyj;
+ssize_t ret_int, ret_out;
+char bufor[buff_size];
+
+if(argc < 3)
+{
+fprintf(stderr, "Niewystarczajaca ilosc argumentow\n");
+exit(1);
+}
+
+if((wej = open(argv[1], O_RDONLY)) == -1)
+{
+printf("Ups nie mozna otworzyc wskazanego pliku");
+exit(1);
+}
+
+if((wyj = open(argv[2], O_WRONLY)) == -1)
+{
+printf("Nie mozna otworzyc pliku");
+exit(1);
+}
+
+while((ret_in = read(wej, &bufor, buff_size)) > 0)
+{
+ret_out = write(wyj, &bufor, (ssize_t)ret_in);
+if(ret_out != ret_in)
+{
+printf("Error");
+exit(1);
+}
+}
+
+close(wej);
+close(wyj);
+
+return 0;
+}
+
+
+
+///////
+time ./zadanie3.out plik2.txt plik3.txt
+real 0m0.001s
+user 0m0.001s
+sys 0m0.000s
+
+Funkcje biblioteczne s¹ szybsze ni¿ wywo³ania systemowe i zwykle nie zawieraj¹ wzglêdów zwi¹zanych z uprawnieniami / bezpieczeñstwem, poniewa¿ dzia³aj¹ z uprawnieniami procesowymi i pamiêci¹.
+Kiedy program korzysta z funkcji systemowych, sam kod nie jest do³¹czany do programu - program zleca to zadanie dla j¹dra (jest to zwykle wykonywane za pomoc¹ przerwañ programowych). W przypadku biblioteki kod w niej zawarty jest do³¹czany do programu.
+// to chyba jest dobrze wyt³umaczone
+Czas potrzebny do wykonania funkcji bibliotecznej, która z kolei nie wywo³uje wywo³ania systemowego, jest zawsze mniejszy ni¿ czas potrzebny na wykonanie wywo³ania systemowego, poniewa¿ program aplikacji nie musi prze³¹czaæ kontekstu miêdzy przestrzeni¹ u¿ytkownika a przestrzeni¹ j¹dra.
+
+
+
+

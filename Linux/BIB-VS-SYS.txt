@@ -1,0 +1,168 @@
+﻿1.
+#include <stdio.h>
+
+
+int main()
+{
+        
+printf("Hello World!\n");
+        
+return 0;
+}
+
+#include <stdio.h>
+
+
+int main()
+{
+	
+printf("Hello World!\n");
+	
+return 0;
+}
+
+
+2.
+#include<stdio.h>
+
+#include<stdlib.h>
+
+
+int main (int argc, char* argv[])
+{
+	
+char bufor[1];
+	
+if(argc<3)
+	
+{
+		
+fprintf(stderr,"BLAD: Niepoprawne paramatry\n");
+		
+fprintf(stderr,"Skladnia mcp, plik1, plik2 \n");
+		
+exit(-1);
+	
+}
+
+	
+FILE *fp=fopen(argv[1], "r");
+	
+FILE *cp=fopen(argv[2], "w");
+
+	
+if (fp==NULL)
+	
+{
+		
+fputs("File error",stderr);
+		
+exit(1);
+	
+}
+
+	
+int tmp;
+	
+while(fread(bufor, 1, 1, fp))
+	
+{
+		
+fwrite(bufor, 1, 1, cp);
+	
+}
+
+	
+fclose(fp);
+	
+fclose(cp);
+	
+return 0;
+}
+
+
+3.
+#include<stdio.h>
+
+#include<stdlib.h>
+
+#include<fcntl.h>
+
+#include<unistd.h>
+
+#include<sys/stat.h>
+
+
+int main (int argc, char* argv[])
+{
+	
+char bufor[1];
+	if(argc<3)
+	
+{
+		
+fprintf(stderr,"BLAD: Niepoprawne paramatry\n");
+		
+fprintf(stderr,"Skladnia mcp, plik1, plik2 \n");
+		
+exit(-1);
+	
+}
+
+	
+int fp=open(argv[1], O_RDONLY);
+	int cp=open(argv[2], O_WRONLY);
+
+	if (fp==-1)
+	
+{
+		
+fputs("File error",stderr);
+		
+exit(1);
+	
+}
+
+	
+int tmp;
+	
+while(read(fp, bufor, 1))
+	
+{
+		
+write(cp, bufor, 1);
+	}
+
+	
+close(fp);
+	
+close(cp);
+	
+return 0;
+}
+
+
+
+4.
+sebek@sebek-VirtualBox:~$ time ./program1.o .bashrc b.txt
+
+real	
+0m0.003s
+user	
+0m0.001s
+sys	
+0m0.000
+s
+sebek@sebek-VirtualBox:~$ time ./program2.o .bashrc b.txt
+
+real	
+0m0.027s
+user	
+0m0.004s
+sys	
+0m0.008s
+
+
+Program oparty o funkcje biblioteczne działa szybciej. 
+W programie z funkcjami systemowymi kod nie jest dołączany do programu lecz jest to zadanie jądra. 
+W przypadku funkcji bibliotecznych zawarty w niej kod jest dołączny do programu.

@@ -1,0 +1,58 @@
+#include <stdio.h>
+
+#include <stdlib.h>
+
+#include <unistd.h>
+
+#include <sys/wait.h>
+
+#include <string.h>
+
+
+int main()
+{
+	
+char polecenie[32];
+	
+int chk;
+
+	
+while(1)
+	
+{
+		
+puts("#");
+		
+scanf("%s", polecenie);
+		
+chk = strcmp(polecenie, "exit");
+// porownoje polecenie czy jest exitem
+ czy jest takie same to chk ma wartosc zero i potem w wychodzi  ten if sprawdza czy chk ==0	
+if(chk == 0)
+// spr		
+{
+			
+exit(0);
+		
+}
+
+		
+if(fork() == 0)
+// tworzenie nowego procesu , jesli zero jest to hcyba zosta³ on utworzony 		
+{
+			
+execlp(polecenie, "", (char*)NULL);// zamienia bierz¹cy proces obrazem nowego // niepewny jeszcze w domu zobaczyc
+		
+}
+		
+else
+		
+{
+			
+wait(NULL);
+		
+}
+	
+}
+}
+

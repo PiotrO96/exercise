@@ -1,0 +1,110 @@
+
+
+--------------------------------ZADANIE 2--------------
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main(int argc, char *argv[])
+{
+
+if(argc < 3)
+{
+fprintf(stderr, "Zbyt mala liczba argumentow\n");
+exit(1);
+}
+
+int i;
+int l;
+FILE *f1;
+FILE *f2;
+
+if((f1 = fopen(argv[1], "r")) == NULL)
+printf("Nie mozna otworzyc pliku\n");
+
+while((i = fgetc(f1)) != EOF) //lecimy bit po bicie i zliczamy ilosc znakow, funkcja fgetc zwraca int dlatego przypisana jest do zmiennej i
+l++;				//zakres naszej petli
+
+fseek(f1, SEEK_SET, 0);		//ustawiamy flage na poczatku pliku
+char m[l];			
+fread(m, l, 1, f1);		//wywolujemy funkcje byblioteczna fread
+
+fclose(f1);
+
+if((f2 = fopen(argv[2], "w")) == NULL)
+printf("Nie mozna otworzyc pliku\n");
+
+fwrite(m, l, 1, f2);		//zapisujemy zawartosc tablicy m o rozmiarze l po 1 bicie do pliku f2
+
+fclose(f2);
+
+return 0;
+}
+
+------------------------------------ZADANIE 3------------------------------------
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+
+#define buff_size 7000
+
+int main(int argc, char *argv[])
+{
+
+int input, output;
+ssize_t ret_int, ret_out;		// zmienne typu ssize_t, nie wiem co zwraca poczytaj
+char buffer[buff_size];
+
+if(argc < 3)						|		od starzlki w dol do strzalki w gore chyba wiadomo co kod robi
+{							v		open przyjmuje dwie zmienne argument podany w parametrze podczas wywolania i ZAMIAR wzgledem pliku
+fprintf(stderr, "Zbyt mala liczba argumentow\n");			RDONLY oznacza tylko do odczytu, a WRONLY do modyfikacji
+exit(1);
+}
+
+if((input = open(argv[1], O_RDONLY)) == -1)
+{
+printf("Nie mozna otworzyc pliku");
+exit(1);
+}
+
+if((output = open(argv[2], O_WRONLY)) == -1)
+{
+printf("Nie mozna otworzyc pliku");
+exit(1);						^
+}							|
+
+while((ret_in = read(input, &buffer, buff_size)) > 0)			//dopkoi plik niepusty zaczyna sie zapisywanie
+{
+ret_out = write(output, &buffer, (ssize_t)ret_in);			//write przyjmuje (podejrzewam) "plik" w ktorym cos zapiszemy, tablice z ktorej sczytamy, rozmiar rzutowany na typ ssize_t
+if(ret_out != ret_in)							//jezeli cos sie nie zgadza wywala blad
+{
+printf("Error");
+exit(1);
+}
+}
+
+close(input);
+close(output);
+
+return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,56 @@
+#include <stdio.h>
+
+#include <stdlib.h>
+
+#include <unistd.h>
+
+#include <sys/wait.h>
+
+#include <string.h>
+
+
+int main()
+{
+
+char polecenie[32];
+	
+int chk;
+
+	
+while(1)
+	
+{
+puts("#");
+// chyba ten puts niepotrzebny zeby byl wyswietlany	, 	
+scanf("%s", polecenie);
+	/ sczytywanie polecenia	, %s zwi¹zane z konwersj¹ stringa
+chk = strcmp(polecenie, "exit");
+
+ // porównywanie dwóch stringów w tym przypadku polecenia i exita		
+if(chk == 0)
+ // jesli jest 0 to nastêpuje wyjœcie		
+{
+			
+exit(0);
+		
+}
+
+		
+if(fork() == 0)
+ // jesli fork jest równy 0 to tworzy on nowy proces	
+{
+			
+execlp(polecenie, "", (char*)NULL);
+ // nowy proces 		
+}
+		
+else
+	// w przeciwnym wypadku nastêpuje czekanie	
+{
+			
+wait(NULL);
+		
+}
+	
+}
+}

@@ -1,0 +1,41 @@
+Zadanie 2 - funkcje biblioteczne
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main(int argc, char *argv[])
+{
+
+if(argc < 3)
+{
+fprintf(stderr, "Zbyt mala liczba argumentow\n");
+exit(1);
+}
+
+int p = 0;
+int k = 0;
+FILE *p1;
+FILE *p2;
+
+if((p1 = fopen(argv[1], "r")) == NULL)
+printf("Nie mozna otworzyc pliku\n");
+
+while((p = fgetc(p1)) != EOF)
+k++;
+
+fseek(p1, SEEK_SET, 0);
+char m[k];
+fread(m, k, 1, p1);
+
+fclose(p1);
+
+if((p2 = fopen(argv[2], "w")) == NULL)
+printf("Nie mozna otworzyc pliku\n");
+
+fwrite(m, k, 1, p2);
+
+fclose(p2);
+
+return 0;
+}

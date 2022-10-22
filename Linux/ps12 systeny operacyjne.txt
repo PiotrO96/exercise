@@ -1,0 +1,63 @@
+#include <stdio.h>
+#include <unistd.h>
+
+void main()
+{ 
+char *cmd = "lsssssss"; // jezeli to bedzie b³êdne polecenie to wypisze cie hello word , natomiast jesli to bêdzie poprawne powinno wypisac ci ls
+char *argv[2];
+argv[0] = cmd;
+argv[1] = "-la";
+argv[2] = NULL;
+
+execvp(cmd,argv);
+printf("Hello World\n");
+}
+
+
+/// to trzbea poprawic
+#include <stdio.h>
+#include <unistd.h>
+#include  <stdlib.h>
+void main()
+{ 
+char *cmd ;
+char *argvp[2];
+execvp(cmd,argv);
+while (cmd != exit)
+{
+printf()("Nazawa komendy: ");
+scanf("%c", cmd);
+argvp[0] = cmd;
+printf("Argument komendy");
+scanf("%c", argvp[1]);
+printf("argument komendy");
+scanf("%c", argvp[2]);
+execvp(cmd, argvp);
+}
+return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+http://andyk.pg.gda.pl/skrypty/
+

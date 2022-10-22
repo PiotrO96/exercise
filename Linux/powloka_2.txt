@@ -1,0 +1,127 @@
+﻿#include <stdio.h>
+
+#include <stdlib.h>
+
+#include <string.h>
+
+#include <sys/wait.h>
+
+#include <unistd.h>
+
+
+int main()
+
+{
+	
+char polecenie[32];
+	// zrobiebnie tablicy charów
+char param1[4];
+	// tablica charów na parametr 1
+char param2[4];
+	 // na parametr 2
+char *argv[20];
+	// tablica argv
+char sciezka[100];
+ // tablica charów na scieżkę	
+int wyb;
+	
+	 //potrzebny int do switcha
+puts("Wybierz opcje:\n1.Polecenie parametrowe\n2.Zmiana folderu\n3.Wyjscie");
+	
+	// wyswietlenie tych opcji
+scanf("%d", &wyb);
+
+ // sczytanie wyboru uzytkownika
+switch(wyb)
+// switch	
+{
+		
+case 1:
+	// przypadek pierwszy		
+while(1)
+			
+{
+				
+puts("#"); // wyswietlenie tego #
+				
+scanf("%s", polecenie);
+
+	 // sczytanie wprowadzonego polecenia 			
+if(strcmp(polecenie,"exit")==0)
+	// następnie porównanie wprowadzonego polecenia z exitem czy nie jest równe 0	jesli uzytkownik wprowadził 0 to wyjdzie		
+exit(0);
+
+				
+argv[0]=polecenie;
+
+// przypisanie do tablicy arg polecenia				
+scanf("%s", param1);
+ // szczytanie parametru 1				
+argv[1]=param1;
+
+	// przypisanie parametru			
+scanf("%s", param2);
+ // sczytanie parametru 2				
+argv[2]=param2;
+
+			// przypisanie	
+argv[3]=NULL;
+
+ // przypisanie nulla do 				
+if(fork()==0)
+ // jesli fork jest równy 0 to tworzy on nowy proces			
+{
+					
+execvp(polecenie, argv);
+nowy proces				
+}
+				
+else
+					
+{
+					
+wait(NULL);
+// w przeciwnym wypadku następuje czekanie					
+}
+			
+}
+			
+break;
+
+	// przerwanie akcji	
+case 2:
+	// drugi przypadek to jest zmiana folderu	
+while(1){
+			
+puts("Wprowadz sciezke:");
+			
+scanf("%s", sciezka);
+// sczytanie scieżki			
+			
+if(chdir(sciezka)==0) puts("\nŚcieżka została zmieniona.");
+			
+else puts("\nBrak takiej ścieżki.");
+		
+}
+			
+break;
+
+		
+case 3:
+			
+exit(0);
+			
+break;
+
+		
+defalut: 
+			
+puts("Wprowadz poprawna opcje.");		
+	
+}
+}
+
+
+
+
+

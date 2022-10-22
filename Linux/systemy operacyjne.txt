@@ -1,0 +1,1 @@
+find / -name "passwd" 2>/dev/null = ¿eby znalaz³o plik psswd i uporz¹dkowa³o to ¿eyb nie by³o ci¹gle wypisywae premmision denied

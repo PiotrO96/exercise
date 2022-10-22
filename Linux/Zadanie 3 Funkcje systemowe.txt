@@ -1,0 +1,52 @@
+Zadanie 3 Funkcje systemowe
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+
+#define buff_size 256 
+
+int main(int argc, char *argv[])
+{
+
+int wej, wyj;
+ssize_t ret_int, ret_out;
+char bufor[buff_size];
+
+if(argc < 3)
+{
+fprintf(stderr, "Niewystarczajaca ilosc argumentow\n");
+exit(1);
+}
+
+if((wej = open(argv[1], O_RDONLY)) == -1)
+{
+printf("Ups nie mozna otworzyc wskazanego pliku");
+exit(1);
+}
+
+if((wyj = open(argv[2], O_WRONLY)) == -1)
+{
+printf("Nie mozna otworzyc pliku");
+exit(1);
+}
+
+while((ret_int = read(wej, &bufor, buff_size)) > 0)
+{
+ret_out = write(wyj, &bufor, (ssize_t)ret_int);
+if(ret_out != ret_int)
+{
+printf("Error");
+exit(1);
+}
+}
+
+close(wej);
+close(wyj);
+
+return 0;
+}
+

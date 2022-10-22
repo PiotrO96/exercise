@@ -1,0 +1,31 @@
+zad 1
+#!/usr/bin/bash // normalnie tego usr trzeba usun¹c bo to ci wskazuje uzytkownika, mozna bez tego samo #!/bin/bash wystarczy
+# testpliku plik1 plik2 ...
+# 
+for nazwa
+do
+test –d „$nazwa” && echo „$name”: katalog
+test –f „$nazwa” && echo „$name”: plik zwykly
+test –e „$nazwa” || echo „$name”: nie istnieje
+done // ogólnie polega to na tym ze jak wskarzesz jakis plik to sprawdzi czy on istnieje czy nie , podonie katalog
+// po wykonaniu skryptu nalezy wpisac .?skrypt.sh i w tym przypadku dodajemy jeszcze nazwe pliku
+// warto ustawic prawa dostêpu chmod  777 skrypt.sh 
+////////zmodyfikowana wersja ////////////////
+#!/usr/bin/bash // normalnie tego usr trzeba usun¹c bo to ci wskazuje uzytkownika, mozna bez tego samo #!/bin/bash wystarczy
+# testpliku plik1 plik2 ...
+# 
+for nazwa in `ls` albo sprobowac tez z ls -l
+do
+test –d „$nazwa” && echo „$name”: katalog
+test –f „$nazwa” && echo „$name”: plik zwykly
+test –e „$nazwa” || echo „$name”: nie istnieje
+done // do tego chyba nie trzeba dodawac nazwy pliku , wyswietli ci info
+
+////zadanie 2////
+#!/usr/bin/bash 
+for nazwa
+do
+echo `ls -l "$nazwa" | cut -d " " -f5 ` : "$nazwa"
+done | sort -n
+
+to ci pokjazuje posortowane pliki wedlóg rozmiaru

@@ -1,0 +1,22 @@
+1ls -l | grep 'PATH' /etc/profile
+2 ls -l | grep 'if^' /etc/profile 
+3.ls -l | grep 'bash$' /etc/passwd
+4 http://www.cs.put.poznan.pl/pawelw/sop/notes/lab9.txt
+ls -l | grep 'a.*a.*a' /usr/share/dict/words
+5. touch a.txt , potem vi a.txt zapisywanie to esc plus shift ZZ
+a) grep "a" a.txt - podkreœla a
+b) grep "^A" a.txt = wypisuje zaczynaj¹ce siê od duzego A
+c) grep "^A.a" a.txt - wypisuje zaczynaj¹ce siê od A potem jest dowolny znak i potem male a
+d)grep „y$” a.txt  konczonce siê na y
+e) grep „^[A-Z]” a.txt  wypisuje od zaczynaj¹cego a- z a wypisze tylko a bo nie mamy z
+f) grep „^[^A-Z]” a.txt - negacja tego poprzedniego tylko ma³e litery
+g)  grep „^[A]” a.txt 
+f)grep "^A\{4\}B" a.txt -wypisze 4 razy du¿e a i B jesli jest
+ ‘.’, ‘*’, ‘^’, ‘$’, ‘[]’, ‘[^]’, ‘\{5\} - wyjasnij te metaznaki
+7 sed „s/A/a/” a.txt  - zamienia na male a na pierwszych pozycjach
+b)sed „s/A/a/g” a.txt.  - to ci wszystkie a zamieni
+c) sed „/A/d” a.txt - kasuje wiersze tam gdzie jest a
+d) sed „2d” a.txt kasuje 2 wiersz
+e) sed „1,2d” a.txt  - usunie pierwszy i drugi wiersz 
+f ) sed'2,$d' a.txt - kasuje 2 i reszte
+g) sed ‘s/\(A.*\) ma \(k.*\)/\2 ma \1/’ a.txt - zamienia miejscami

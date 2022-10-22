@@ -1,0 +1,63 @@
+
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <unistd.h>
+
+int main(int argc, char* argv[])
+{
+
+char *c = "exit";
+
+if(c == "exit")
+exit(1);
+
+int ex;
+
+if(fork() == 0)
+ex = execl("/bin/ls", "ls", "-l", NULL);
+else
+{
+wait(2000);
+printf("Koniec shell\n");
+}
+
+return 0;
+}
+-------------------------------------------------
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <string.h>
+
+int main(int argc, char* argv[])
+{
+
+int ex;
+char c[100] = "/bin/";
+char *c2 = argv[1];
+strcat(c, c2);
+
+if(argv[1] == "exit")
+exit(1);
+
+if(fork() == 0)
+{
+if(argc == 3)
+ex = execl(c, arv[1], argv[2], NULL);
+else
+ex = execl(c, argv[1], NULL);
+}
+else
+{
+wait(2000);
+printf("Koniec shell\n");
+}
+
+return 0;
+}
+
+
+
+
